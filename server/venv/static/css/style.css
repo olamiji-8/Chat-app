@@ -28,8 +28,10 @@ body {
 
 .chat-footer {
   display: flex;
+  align-items: center;
   padding: 10px;
   border-top: 1px solid #ccc;
+  position: relative;
 }
 
 .chat-footer input {
@@ -46,6 +48,51 @@ body {
   border: none;
   border-radius: 20px;
   padding: 10px 15px;
+}
+
+/* Styles for plus icon and additional icons */
+.plus-icon {
+  background: #F9D9E8;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plus-icon img {
+  width: 15px;
+  height: 15px;
+}
+
+.additional-icons {
+  display: flex;
+  position: absolute;
+  bottom: 50px; /* Position it above the footer */
+  left: 10px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 5px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  gap: 10px;
+  z-index: 10;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: scale(0);
+  visibility: hidden;
+}
+
+.additional-icons.show {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+}
+
+.additional-icons .icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .message-container {

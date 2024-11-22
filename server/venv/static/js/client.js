@@ -51,3 +51,11 @@ function addMessage(text, sender) {
 
   chatBody.scrollTop = chatBody.scrollHeight;
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const plusIcon = document.querySelector(".plus-icon");
+  const additionalIcons = document.querySelector(".additional-icons");
+
+  plusIcon.addEventListener("click", () => {
+    additionalIcons.classList.toggle("show");
+  });
+});
