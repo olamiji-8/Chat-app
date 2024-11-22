@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/static/css/tailwind.css" rel="stylesheet"> <!-- Tailwind CSS -->
-    <title>Chat App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot UI</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 </head>
 <body>
-    <h1>Welcome to the Chat App!</h1>
-    <script src="/static/js/client.js"></script>
+  <div class="chat-window">
+    <div class="chat-header">Assistant</div>
+    <div id="chat-body" class="chat-body">
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="chat-input" placeholder="Type Something Here">
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+  <script src="/static/js/client.js"></script>
 </body>
 </html>
