@@ -13,19 +13,23 @@
     <div id="chat-body" class="chat-body">
     </div>
     <div class="chat-footer">
-      <div class="plus-icon">
-        <img src="{{ url_for('static', filename='icons/plus-icon.svg') }}" alt="Plus">
+      <div class="input-container">
+        <div class="plus-icon">
+          <img src="{{ url_for('static', filename='icons/plus-icon.svg') }}" alt="Plus">
+        </div>
+        <input type="text" id="chat-input" placeholder="Type Something Here" />
+        <div class="additional-icons">
+          <img src="{{ url_for('static', filename='icons/camera-icon.svg') }}" alt="Camera" class="icon">
+          <img src="{{ url_for('static', filename='icons/image-icon.svg') }}" alt="Image" class="icon">
+          <img src="{{ url_for('static', filename='icons/microphone-icon.svg') }}" alt="Microphone" class="icon">
+        </div>
+        <button id="send-btn">
+          <img src="{{ url_for('static', filename='icons/send-icon.svg') }}" alt="Send">
+        </button>
       </div>
-      <div class="additional-icons">
-        <img src="{{ url_for('static', filename='icons/camera-icon.svg') }}" alt="Camera" class="icon">
-        <img src="{{ url_for('static', filename='icons/image-icon.svg') }}" alt="Image" class="icon">
-        <img src="{{ url_for('static', filename='icons/microphone-icon.svg') }}" alt="Microphone" class="icon">
-      </div>
-      <input type="text" id="chat-input" placeholder="Type Something Here" />
-      <button id="send-btn">
-        <img src="{{ url_for('static', filename='icons/send-icon.svg') }}" alt="Send">
-      </button>
     </div>
+    
+    
   </div>
 
   <script src="/static/js/client.js"></script>

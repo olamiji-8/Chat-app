@@ -54,8 +54,16 @@ function addMessage(text, sender) {
 document.addEventListener("DOMContentLoaded", () => {
   const plusIcon = document.querySelector(".plus-icon");
   const additionalIcons = document.querySelector(".additional-icons");
+  const chatInput = document.getElementById("chat-input");
 
   plusIcon.addEventListener("click", () => {
     additionalIcons.classList.toggle("show");
+
+    if (additionalIcons.classList.contains("show")) {
+      chatInput.setAttribute("placeholder", "");
+    } else {
+      chatInput.setAttribute("placeholder", "Type Something Here");
+    }
   });
 });
+
