@@ -1,21 +1,34 @@
+/* General styles */
 body {
   background-color: #f8e4ec;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  height: 100%; /* Ensure the body takes the full height of the screen */
 }
 
 .chat-window {
-  max-width: 400px;
-  margin: auto;
-  margin-top: 50px;
+  max-width: 90%; /* Increased width for smaller screens */
+  margin: 0 auto; /* Center the chat window */
   border: 1px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
   background: white;
   display: flex;
   flex-direction: column;
-  height: 500px; 
+  height: calc(100vh - 20px); /* Full height minus small padding */
+  margin-top: 0; /* Remove margin at the top */
+  margin-bottom: 0; /* Remove margin at the bottom */
+}
+
+/* Full width for desktops */
+@media (min-width: 1024px) {
+  .chat-window {
+    max-width: 100%; /* Full width for desktop */
+    height: 100vh; /* Full height without any margin */
+    margin: 0; /* Remove margins for seamless look */
+    border-radius: 0; /* Remove border radius for a unified view */
+  }
 }
 
 .chat-header {
@@ -72,7 +85,7 @@ body {
   align-items: center;
   cursor: pointer;
   margin-right: 10px;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .plus-icon img {
@@ -84,9 +97,9 @@ body {
   display: flex;
   gap: 10px;
   position: absolute;
-  top: 50%; 
-  left: 25%; 
-  transform: translate(-50%, -50%) scale(0); 
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%) scale(0);
   opacity: 0;
   transition: transform 0.3s ease, opacity 0.3s ease;
   background: white;
@@ -162,14 +175,14 @@ body {
 
 .message-container.user .text-box {
   background-color: #FF5912;
-  color: white; 
+  color: white;
 }
 
 .message-container.user .text-box::before {
   left: auto;
   right: -10px;
   transform: rotate(180deg);
-  background-color: #FF5912; 
+  background-color: #FF5912;
 }
 
 .message-container.bot .text-box::before {
@@ -180,6 +193,15 @@ body {
   background-color: #f0f0f0;
   color: black;
 }
+.message-container img {
+  max-width: 80%; /* Limit the width to 80% of the container */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional: adds a rounded border for images */
+  object-fit: cover; /* Ensures the image doesn’t stretch */
+}
+
+
+
 .typing-indicator {
   display: flex;
   align-items: center;
@@ -222,5 +244,41 @@ body {
   }
   40% {
     opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chat-window {
+    max-width: 100%; /* Take full width on smaller screens */
+    height: 100%; /* Full height */
+    margin: 0;
+    border-radius: 0;
+    padding: 0; /* Remove any padding for full screen usage */
+  }
+
+  .chat-header {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .chat-body {
+    padding: 10px;
+  }
+
+  .chat-footer {
+    padding: 8px;
+  }
+
+  .input-container {
+    padding: 5px;
+  }
+
+  #chat-input {
+    padding: 8px;
+    font-size: 13px;
+  }
+  .message-container img {
+    max-width: 100%; /* Limit image to the width of the container */
   }
 }

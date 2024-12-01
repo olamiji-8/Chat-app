@@ -2,15 +2,12 @@ const chatBody = document.getElementById("chat-body");
 const chatInput = document.getElementById("chat-input");
 const sendBtn = document.getElementById("send-btn");
 
-const botAvatar = "/static/bot-avatar.png";
-const userAvatar = "/static/user-avatar.png";
-const socket = io("http://localhost:4000"); 
-
-let typingTimeout;
+const socket = io("http://localhost:4000");
 
 socket.on("message", (response) => {
   removeTypingIndicator();
-  addMessage(response, "bot");
+  const { text, image } = response; 
+  addMessage(text, image, "bot");
 });
 
 socket.on("typing", () => {
@@ -22,42 +19,54 @@ socket.on("stop_typing", () => {
 });
 
 sendBtn.addEventListener("click", () => sendMessage());
+
 chatInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
     sendMessage();
-  } else {
-    socket.emit("typing");
-    clearTimeout(typingTimeout);
-    typingTimeout = setTimeout(() => {
-      socket.emit("stop_typing");
-    }, 1000);
   }
 });
 
 function sendMessage() {
   const message = chatInput.value.trim();
   if (message) {
-    addMessage(message, "user");
-    chatInput.value = "";
-    socket.emit("stop_typing");
-    socket.emit("message", message);
+    addMessage(message, null, "user"); 
+    chatInput.value = ""; 
+    socket.emit("message", message); 
   }
 }
 
-function addMessage(text, sender) {
+function addMessage(text, image, sender) {
+  removeTypingIndicator();
+
   const messageContainer = document.createElement("div");
-  messageContainer.className = `message-container ${sender}`;
+  messageContainer.className = `message-container ${sender}`; 
+
   const avatar = document.createElement("img");
   avatar.className = "avatar";
   avatar.src = sender === "bot" ? botAvatar : userAvatar;
-  const textBox = document.createElement("div");
-  textBox.className = "text-box";
-  textBox.textContent = text;
+
+  const contentBox = document.createElement("div");
+  contentBox.className = "content-box";
+
+  if (text) {
+    const textBox = document.createElement("div");
+    textBox.className = "text-box";
+    textBox.textContent = text;
+    contentBox.appendChild(textBox);
+  }
+
+  if (image) {
+    const imageBox = document.createElement("img");
+    imageBox.className = "image-box";
+    imageBox.src = image;
+    contentBox.appendChild(imageBox);
+  }
 
   messageContainer.appendChild(avatar);
-  messageContainer.appendChild(textBox);
+  messageContainer.appendChild(contentBox);
   chatBody.appendChild(messageContainer);
+
   chatBody.scrollTop = chatBody.scrollHeight;
 }
 
@@ -89,3 +98,18 @@ function removeTypingIndicator() {
     chatBody.removeChild(typingIndicator);
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const plusIcon = document.querySelector(".plus-icon");
+  const additionalIcons = document.querySelector(".additional-icons");
+
+  plusIcon.addEventListener("click", () => {
+    additionalIcons.classList.toggle("show");
+
+    if (additionalIcons.classList.contains("show")) {
+      chatInput.setAttribute("placeholder", "");
+    } else {
+      chatInput.setAttribute("placeholder", "Type Something Here");
+    }
+  });
+});

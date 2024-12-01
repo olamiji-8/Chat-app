@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="chat-window">
-    <div class="chat-header">Assistant</div>
+    <div class="chat-header">Assistant @olapelu</div>
     <div id="chat-body" class="chat-body">
     </div>
     <div class="chat-footer">
@@ -29,8 +29,11 @@
       </div>
     </div>
     
-    
   </div>
+  <script>
+    const botAvatar = "{{ url_for('static', filename='bot-avatar.png') }}";
+    const userAvatar = "{{ url_for('static', filename='user-avatar.png') }}";
+  </script>
 
   <script src="/static/js/client.js"></script>
 </body>
