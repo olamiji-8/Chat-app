@@ -2,7 +2,7 @@ const chatBody = document.getElementById("chat-body");
 const chatInput = document.getElementById("chat-input");
 const sendBtn = document.getElementById("send-btn");
 
-const socket = io("http://localhost:4000");
+const socket = io("https://chat-app-1-co8u.onrender.com");
 
 socket.on("message", (response) => {
   removeTypingIndicator();
