@@ -194,10 +194,10 @@ body {
   color: black;
 }
 .message-container img {
-  max-width: 80%; /* Limit the width to 80% of the container */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 8px; /* Optional: adds a rounded border for images */
-  object-fit: cover; /* Ensures the image doesn’t stretch */
+  max-width: 80%; 
+  height: auto; 
+  border-radius: 8px; 
+  object-fit: cover; 
 }
 
 
