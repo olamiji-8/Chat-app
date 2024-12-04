@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
       try {
         const axios = require("axios");
         const response = await axios.post(
-          `http://localhost:${PORT}/api/robot-response`,
+          `https://chat-app-cqha.onrender.com:${PORT}/api/robot-response`,
           { message: userMessage }
         );
         botResponse = response.data.reply;
