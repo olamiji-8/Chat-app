@@ -7,6 +7,9 @@ import time
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+is_local = os.getenv("FLASK_ENV", "production") == "development"
+app.config["SOCKET_URL"] = "http://localhost:4000" if is_local else "https://chat-app-1-co8u.onrender.com"
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -29,7 +32,7 @@ def handle_message(data):
         bot_response = "Error: Unable to fetch response."
 
     emit("stop_typing", broadcast=True)
-    emit("message", bot_response, broadcast=True)
+    emit("message", {"text": bot_response}, broadcast=True)
 
 @socketio.on("typing")
 def handle_typing():
@@ -41,4 +44,5 @@ def handle_stop_typing():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 4000))
-    socketio.run(app, debug=True, host="0.0.0.0", port=port)
+    host = "127.0.0.1" if is_local else "0.0.0.0"
+    socketio.run(app, debug=is_local, host=host, port=port)
