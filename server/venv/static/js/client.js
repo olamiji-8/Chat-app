@@ -2,18 +2,16 @@ const chatBody = document.getElementById("chat-body");
 const chatInput = document.getElementById("chat-input");
 const sendBtn = document.getElementById("send-btn");
 
-const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-const socketUrl = isLocal 
-  ? "http://localhost:4000" 
-  : "https://chat-app-1-co8u.onrender.com";
-
-const socket = io(socketUrl);
+const socket = io("http://localhost:4000");
 
 socket.on("message", (response) => {
-  removeTypingIndicator();
-  const { text, image } = response; 
+  console.log("Server Response:", response); // Debugging log
+  const { text, image } = response.text; // Access text and image from response.text
   addMessage(text, image, "bot");
 });
+
+
+
 
 socket.on("typing", () => {
   showTypingIndicator("bot");

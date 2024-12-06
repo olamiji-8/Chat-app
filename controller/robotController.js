@@ -10,6 +10,7 @@ const getRandomResponse = (req, res) => {
 
     res.status(200).json({ reply: response });
   } catch (error) {
+    console.error(error); // Log errors for debugging
     res.status(500).json({ error: "Something went wrong!" });
   }
 };

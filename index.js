@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5001;
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://chat-app-1-co8u.onrender.com",
+    origin: "http://localhost:4000",
     methods: ["GET", "POST"],
   },
 });
@@ -31,9 +31,9 @@ io.on("connection", (socket) => {
       try {
         const axios = require("axios");
         const response = await axios.post(
-          "https://chat-app-cqha.onrender.com/api/robot-response",
+          `http://localhost:${PORT}/api/robot-response`,
           { message: userMessage }
-        );        
+        );
         botResponse = response.data.reply;
       } catch (error) {
         botResponse = "Sorry, something went wrong!";

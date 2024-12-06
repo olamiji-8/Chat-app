@@ -19,7 +19,7 @@ body {
   background: white;
   display: flex;
   flex-direction: column;
-  height: 100%; /* Full height of the parent */
+  height: 100%;
   min-height: 100vh; /* Ensure full viewport height */
   margin-top: 0;
   margin-bottom: 0;
@@ -247,11 +247,11 @@ body {
   }
 }
 
-
+/* Fix for smaller screens */
 @media (max-width: 768px) {
   .chat-window {
     max-width: 100%;
-    height: calc(var(--vh, 1vh) * 100); 
+    height: calc(100vh - 10px); 
     margin: 0;
     border-radius: 0;
   }
@@ -280,5 +280,10 @@ body {
 
   .message-container img {
     max-width: 100%;
+  }
+
+  .message-container .avatar {
+    width: 30px;
+    height: 30px;
   }
 }

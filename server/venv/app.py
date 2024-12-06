@@ -1,14 +1,10 @@
-import os
-import requests
+import requests 
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 import time
 
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
-
-is_local = os.getenv("FLASK_ENV", "production") == "development"
-app.config["SOCKET_URL"] = "http://localhost:4000" if is_local else "https://chat-app-1-co8u.onrender.com"
+socketio = SocketIO(app)
 
 @app.route('/')
 def home():
@@ -20,10 +16,10 @@ def handle_message(data):
     print(f"User: {user_message}")
 
     emit("typing", broadcast=True)
-    time.sleep(1)
+    time.sleep(1) 
 
     try:
-        api_url = "https://chat-app-cqha.onrender.com/api/robot-response"
+        api_url = "http://localhost:5000/api/robot-response" 
         response = requests.post(api_url, json={"message": user_message})
         response_data = response.json()
         bot_response = response_data.get("reply", "Sorry, I didn't understand that.")
@@ -32,7 +28,7 @@ def handle_message(data):
         bot_response = "Error: Unable to fetch response."
 
     emit("stop_typing", broadcast=True)
-    emit("message", {"text": bot_response}, broadcast=True)
+    emit("message", bot_response, broadcast=True)
 
 @socketio.on("typing")
 def handle_typing():
@@ -43,6 +39,4 @@ def handle_stop_typing():
     emit("stop_typing", broadcast=True)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 4000))
-    host = "127.0.0.1" if is_local else "0.0.0.0"
-    socketio.run(app, debug=is_local, host=host, port=port)
+    socketio.run(app, debug=True, port=4000)
