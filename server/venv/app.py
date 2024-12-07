@@ -20,19 +20,27 @@ def handle_message(data):
     print(f"User: {user_message}")
 
     emit("typing", broadcast=True)
-    time.sleep(1) 
+    time.sleep(1)
 
     try:
         api_url = "https://chat-app-cqha.onrender.com/api/robot-response" 
         response = requests.post(api_url, json={"message": user_message})
         response_data = response.json()
         bot_response = response_data.get("reply", "Sorry, I didn't understand that.")
+
+        # Include image data if available
+        image_url = response_data.get("image_url", None)
+        payload = {"text": bot_response}
+        if image_url:
+            payload["image"] = image_url
+
     except Exception as e:
         print(f"API error: {e}")
-        bot_response = "Error: Unable to fetch response."
+        payload = {"text": "Error: Unable to fetch response."}
 
     emit("stop_typing", broadcast=True)
-    emit("message", bot_response, broadcast=True)
+    emit("message", payload, broadcast=True)
+
 
 @socketio.on("typing")
 def handle_typing():
