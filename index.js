@@ -11,7 +11,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://chat-app-1-co8u.onrender.com", "http://localhost:3000"],
+    origin: ["https://chat-app-1-co8u.onrender.com", "http://localhost:4000"],
     methods: ["GET", "POST"],
   },
 });
@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
       } else {
         try {
           const response = await axios.post(
-            `https://chat-app-cqha.onrender.com/api/robot-response`,
+            `http://localhost:5000/api/robot-response`,
             { message: userMessage }
           );
           botResponse = response.data.reply;
