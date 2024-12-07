@@ -16,8 +16,7 @@ app.config["SOCKET_URL"] = "http://localhost:4000" if is_local else "https://cha
 @app.route('/')
 def home():
     return render_template('index.html')
-
-# Helper function to fetch response asynchronously
+    
 async def fetch_response(api_url, message):
     async with aiohttp.ClientSession() as session:
         try:
