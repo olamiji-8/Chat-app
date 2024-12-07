@@ -1,3 +1,4 @@
+import os
 import requests 
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
@@ -8,6 +9,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 is_local = os.getenv("FLASK_ENV", "production") == "development"
 app.config["SOCKET_URL"] = "http://localhost:4000" if is_local else "https://chat-app-1-co8u.onrender.com"
+
 @app.route('/')
 def home():
     return render_template('index.html')
