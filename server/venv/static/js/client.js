@@ -1,6 +1,8 @@
 const chatBody = document.getElementById("chat-body");
 const chatInput = document.getElementById("chat-input");
 const sendBtn = document.getElementById("send-btn");
+const plusIcon = document.querySelector(".plus-icon");
+const additionalIcons = document.querySelector(".additional-icons");
 
 const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 const socketUrl = isLocal
@@ -10,13 +12,9 @@ const socketUrl = isLocal
 const socket = io(socketUrl);
 
 socket.on("message", (response) => {
-  console.log("Server Response:", response); 
   const { text, image } = response.text;
   addMessage(text, image, "bot");
 });
-
-
-
 
 socket.on("typing", () => {
   showTypingIndicator("bot");
@@ -33,6 +31,10 @@ chatInput.addEventListener("keydown", (event) => {
     event.preventDefault();
     sendMessage();
   }
+});
+
+chatInput.addEventListener("focus", () => {
+  additionalIcons.classList.remove("show");
 });
 
 function sendMessage() {
@@ -108,16 +110,28 @@ function removeTypingIndicator() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const plusIcon = document.querySelector(".plus-icon");
-  const additionalIcons = document.querySelector(".additional-icons");
-
   plusIcon.addEventListener("click", () => {
     additionalIcons.classList.toggle("show");
-
-    if (additionalIcons.classList.contains("show")) {
-      chatInput.setAttribute("placeholder", "");
-    } else {
-      chatInput.setAttribute("placeholder", "Type Something Here");
-    }
   });
+
+  chatInput.addEventListener("focus", () => {
+    additionalIcons.classList.remove("show");
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const assistantNameElement = document.getElementById("assistant-name");
+
+  const fetchAssistantName = async () => {
+    try {
+      const response = await fetch('/api/assistant-name');
+      const data = await response.json();
+      const assistantName = data.name || "Assistant"; 
+      assistantNameElement.textContent = assistantName;
+    } catch (error) {
+      assistantNameElement.textContent = "@Olapelu";
+    }
+  };
+
+  fetchAssistantName();
 });

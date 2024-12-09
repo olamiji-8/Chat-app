@@ -100,7 +100,7 @@ body {
   gap: 10px;
   position: absolute;
   top: 50%;
-  left: 25%;
+  left: 19%;
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
   transition: transform 0.3s ease, opacity 0.3s ease;
