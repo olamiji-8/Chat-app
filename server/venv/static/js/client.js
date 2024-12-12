@@ -49,10 +49,6 @@ function sendMessage() {
   }
 }
 
-function adjustChatBodyScroll() {
-  const chatBody = document.getElementById("chat-body");
-  chatBody.scrollTop = chatBody.scrollHeight; // Keep the chat view scrolled to the latest message
-}
 
 function addMessage(text, image, sender) {
   removeTypingIndicator();

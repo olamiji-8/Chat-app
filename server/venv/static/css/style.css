@@ -224,6 +224,20 @@ body {
   color: #0056b3;
 }
 
+.media-container {
+  max-width: 100%;
+  margin: 10px 0;
+}
+
+.media-container iframe,
+.media-container video,
+.media-container audio {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
 .message-container img {
   max-width: 80%;
   height: auto;
