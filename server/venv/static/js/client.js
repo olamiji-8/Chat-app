@@ -11,10 +11,13 @@ const socketUrl = isLocal
 
 const socket = io(socketUrl);
 
+
 socket.on("message", (response) => {
   const { text, image } = response.text;
   addMessage(text, image, "bot");
+  adjustChatBodyScroll(); 
 });
+
 
 socket.on("typing", () => {
   showTypingIndicator("bot");
@@ -46,23 +49,28 @@ function sendMessage() {
   }
 }
 
+function adjustChatBodyScroll() {
+  const chatBody = document.getElementById("chat-body");
+  chatBody.scrollTop = chatBody.scrollHeight; // Keep the chat view scrolled to the latest message
+}
+
 function addMessage(text, image, sender) {
   removeTypingIndicator();
 
   const messageContainer = document.createElement("div");
-  messageContainer.className = `message-container ${sender}`; 
+  messageContainer.className = `message-container ${sender}`;
 
   const avatar = document.createElement("img");
   avatar.className = "avatar";
   avatar.src = sender === "bot" ? botAvatar : userAvatar;
 
   const contentBox = document.createElement("div");
-  contentBox.className = "content-box";
+  contentBox.className = "content-box unified-box"; // Unified border
 
   if (text) {
     const textBox = document.createElement("div");
     textBox.className = "text-box";
-    textBox.textContent = text;
+    textBox.innerHTML = formatMessageWithLinks(text); // Add URL support
     contentBox.appendChild(textBox);
   }
 
@@ -79,6 +87,14 @@ function addMessage(text, image, sender) {
 
   chatBody.scrollTop = chatBody.scrollHeight;
 }
+
+function formatMessageWithLinks(message) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return message.replace(urlRegex, (url) => {
+    return `<a href="${url}" target="_blank" class="message-link">${url}</a>`;
+  });
+}
+
 
 function showTypingIndicator(sender) {
   if (!document.getElementById("typing-indicator")) {
