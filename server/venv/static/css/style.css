@@ -33,11 +33,31 @@ body {
 }
 
 .chat-header {
-  background: #FF5912;
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the text content */
+  background-color: #FF5912; /* Colored border from the previous one */
+  color: white; /* White text color */
   padding: 10px;
-  text-align: center;
-  font-size: 18px;
+  border-top: 5px solid #FF5912; /* Border at the top with the same color */
+}
+
+.bot-avatar {
+  width: 30px; /* Avatar size */
+  height: 30px;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.header-text {
+  display: flex;
+  align-items: center; /* Align the text vertically with the avatar */
+  justify-content: center; /* Center the text content */
+  margin-left: 40px; /* Adjust space between avatar and text */
+}
+
+#assistant-name {
+  font-weight: bold;
 }
 
 .chat-body {
@@ -67,15 +87,7 @@ body {
   overflow: hidden;
 }
 
-#chat-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 10px;
-  font-size: 14px;
-  background-color: transparent;
-}
-
+/* Plus icon and additional icons positioning */
 .plus-icon {
   width: 30px;
   height: 30px;
@@ -97,8 +109,8 @@ body {
   display: flex;
   gap: 10px;
   position: absolute;
-  top: 50%;
-  left: 19%;
+  top: 24%;
+  left: 5%;
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -117,6 +129,20 @@ body {
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+#chat-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 14px;
+  background-color: transparent;
+}
+
+/* If you want to hide the placeholder text upon clicking the plus icon */
+#chat-input:focus::placeholder {
+  opacity: 0;
 }
 
 #send-btn {
@@ -212,6 +238,7 @@ body {
 .message-container.bot .text-box::before {
   left: -10px;
 }
+
 /* Styling for links in messages */
 .message-link {
   color: #007bff;
@@ -224,19 +251,49 @@ body {
   color: #0056b3;
 }
 
-.media-container {
-  max-width: 100%;
-  margin: 10px 0;
+/* Embedded media for user messages */
+.message-container.user .embedded-media {
+  align-self: flex-end; /* Align media to the right */
+  margin-right: 10px; /* Add space from the edge */
+  margin-left: auto; /* Push media away from the left */
 }
 
-.media-container iframe,
-.media-container video,
-.media-container audio {
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Embedded media for bot messages */
+.message-container.bot .embedded-media {
+  align-self: flex-start; /* Align media to the left */
+  margin-left: 10px; /* Add space from the edge */
+  margin-right: auto; /* Push media away from the right */
 }
 
+.embedded-media {
+  max-width: 100%;
+  margin-top: 10px;
+  border-radius: 5px; /* Smooth edges */
+  display: block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  outline: none; /* Removes focus outline */
+  border: none; /* Ensures no borders */
+  overflow: hidden; /* Ensures no overflow for rounded corners */
+  width: 100%;
+  height: auto;
+}
+
+.embedded-media video,
+.embedded-media audio {
+  width: 100%; /* Ensure media fits the container */
+  display: block;
+  border-radius: 5px; /* Match parent border-radius */
+  border: none !important; /* Forcefully removes any border */
+  outline: none !important; /* Removes focus outline */
+  box-shadow: none !important; /* Removes any unwanted shadow */
+  height: 200px;
+}
+
+video, audio {
+  border: none; /* Reset browser-specific styles */
+  outline: none; /* Reset browser-specific focus styles */
+  box-shadow: none; /* Prevent extra shadows */
+}
 
 .message-container img {
   max-width: 80%;
@@ -290,7 +347,6 @@ body {
   }
 }
 
-/* Fix for smaller screens */
 @media (max-width: 768px) {
   .chat-window {
     max-width: 100%;
@@ -328,5 +384,11 @@ body {
   .message-container .avatar {
     width: 30px;
     height: 30px;
+  }
+
+  .embedded-media {
+    margin-left: auto; /* Align media to the right */
+    margin-right: 10px; /* Add space from the right edge */
+    max-width: 90%; /* Adjust size for smaller screens */
   }
 }

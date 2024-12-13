@@ -36,9 +36,24 @@ chatInput.addEventListener("keydown", (event) => {
   }
 });
 
+plusIcon.addEventListener("click", () => {
+  // Clear the placeholder text
+  chatInput.placeholder = "";
+
+  // Move the additional icons closer to the plus icon
+  additionalIcons.style.transform = "translateX(-5%)"; // Adjust the value as needed
+});
+
 chatInput.addEventListener("focus", () => {
   additionalIcons.classList.remove("show");
+
+  // If the input is empty, restore the placeholder text
+  if (!chatInput.value.trim()) {
+    chatInput.placeholder = "Type Something Here"; // Replace with your desired placeholder text
+  }
 });
+
+
 
 function sendMessage() {
   const message = chatInput.value.trim();
@@ -120,6 +135,78 @@ function removeTypingIndicator() {
     chatBody.removeChild(typingIndicator);
   }
 }
+
+function formatMessageWithLinks(message) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return message.replace(urlRegex, (url) => {
+    if (isYouTubeLink(url)) {
+      return `
+        <iframe 
+          class="embedded-media"
+          width="100%" 
+          height="315" 
+          src="https://www.youtube.com/embed/${extractYouTubeID(url)}" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>`;
+    } else if (isSpotifyLink(url)) {
+      return `
+        <iframe 
+          class="embedded-media"
+          src="https://open.spotify.com/embed/track/${extractSpotifyID(url)}" 
+          width="100%" 
+          height="80" 
+          frameborder="0" 
+          allowtransparency="true" 
+          allow="encrypted-media">
+        </iframe>`;
+    } else if (isVideoLink(url)) {
+      return `
+        <video controls class="embedded-media">
+          <source src="${url}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>`;
+    } else if (isAudioLink(url)) {
+      return `
+        <audio controls class="embedded-media">
+          <source src="${url}" type="audio/mpeg">
+          Your browser does not support the audio tag.
+        </audio>`;
+    } else {
+      return `<a href="${url}" target="_blank" class="message-link">${url}</a>`;
+    }
+  });
+}
+
+// Helper functions to detect links and extract IDs
+function isYouTubeLink(url) {
+  return /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)/.test(url);
+}
+
+function extractYouTubeID(url) {
+  const match = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return match ? match[1] : null;
+}
+
+function isSpotifyLink(url) {
+  return /(?:https?:\/\/)?(?:open\.spotify\.com\/track\/)/.test(url);
+}
+
+function extractSpotifyID(url) {
+  const match = url.match(/track\/([a-zA-Z0-9]+)/);
+  return match ? match[1] : null;
+}
+
+function isVideoLink(url) {
+  return /\.(mp4|webm|ogg)$/i.test(url);
+}
+
+function isAudioLink(url) {
+  return /\.(mp3|wav|ogg)$/i.test(url);
+}
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   plusIcon.addEventListener("click", () => {

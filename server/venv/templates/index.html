@@ -9,7 +9,12 @@
 </head>
 <body>
   <div class="chat-window">
-    <div class="chat-header">Assistant <span id="assistant-name">Loading...</span></div>
+    <div class="chat-header">
+      <img src="{{ url_for('static', filename='bot-avatar.png') }}" alt="Bot Avatar" class="bot-avatar">
+      <div class="header-text">
+        Assistant <span id="assistant-name">Loading...</span>
+      </div>
+    </div>
 
     <div id="chat-body" class="chat-body">
     </div>
