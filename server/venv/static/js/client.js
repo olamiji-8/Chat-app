@@ -92,12 +92,29 @@ function addMessage(text, image, sender) {
     contentBox.appendChild(imageBox);
   }
 
+  // Add timestamp
+  const timestamp = document.createElement("div");
+  timestamp.className = "timestamp";
+  const currentTime = new Date();
+  timestamp.textContent = formatTime(currentTime);
+
+  contentBox.appendChild(timestamp);
+
   messageContainer.appendChild(avatar);
   messageContainer.appendChild(contentBox);
   chatBody.appendChild(messageContainer);
 
   chatBody.scrollTop = chatBody.scrollHeight;
 }
+
+function formatTime(date) {
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+  const ampm = hours >= 12 ? "PM" : "AM";
+  return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+}
+
 
 function formatMessageWithLinks(message) {
   const urlRegex = /(https?:\/\/[^\s]+)/g;
