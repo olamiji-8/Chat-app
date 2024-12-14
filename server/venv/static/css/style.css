@@ -205,8 +205,8 @@ body {
   background-color: #FF5912; /* User-specific color */
   color: white; /* Contrast text color */
   text-align: left; /* Align text to the left for readability */
-  max-width: 70%; /* Restrict the width to prevent over-expansion */
-  padding: 12px; /* Uniform padding for better spacing */
+  max-width: 1000%; /* Restrict the width to prevent over-expansion */
+  padding: 19px; /* Uniform padding for better spacing */
   border-radius: 15px; /* Rounded edges for a clean look */
   font-size: 14px; /* Standard font size for readability */
   line-height: 1.4; /* Proper line spacing */
@@ -225,7 +225,7 @@ body {
   right: -10px; /* Position arrow on the right */
   width: 10px;
   height: 10px;
-  background-color: #FF5912; /* Match the message box color */
+  background-color: #FF5912; 
   clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
@@ -295,9 +295,9 @@ body {
   margin-top: 10px;
   border-radius: 5px; /* Smooth edges */
   display: block;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle and lighter shadow */
   outline: none; /* Removes focus outline */
-  border: none; /* Ensures no borders */
+  border: 1px solid #ddd; /* Thin border with light gray color */
   overflow: hidden; /* Ensures no overflow for rounded corners */
   width: 100%;
   height: auto;
@@ -310,9 +310,10 @@ body {
   border-radius: 5px; /* Match parent border-radius */
   border: none !important; /* Forcefully removes any border */
   outline: none !important; /* Removes focus outline */
-  box-shadow: none !important; /* Removes any unwanted shadow */
+  box-shadow: none !important; /* Removes unwanted shadow */
   height: 200px;
 }
+
 
 video, audio {
   border: none; /* Reset browser-specific styles */
@@ -321,7 +322,7 @@ video, audio {
 }
 
 .message-container img {
-  max-width: 80%;
+  max-width: 40%;
   height: auto;
   border-radius: 8px;
   object-fit: cover;
@@ -403,7 +404,7 @@ video, audio {
   }
 
   .message-container img {
-    max-width: 100%;
+    max-width: 73%;
   }
 
   .message-container .avatar {
