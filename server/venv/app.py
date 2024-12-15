@@ -28,7 +28,6 @@ def handle_message(data):
         response_data = response.json()
         bot_response = response_data.get("reply", "Sorry, I didn't understand that.")
 
-        # Include image data if available
         image_url = response_data.get("image_url", None)
         payload = {"text": bot_response}
         if image_url:

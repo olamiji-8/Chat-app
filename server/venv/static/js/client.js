@@ -37,19 +37,16 @@ chatInput.addEventListener("keydown", (event) => {
 });
 
 plusIcon.addEventListener("click", () => {
-  // Clear the placeholder text
   chatInput.placeholder = "";
 
-  // Move the additional icons closer to the plus icon
-  additionalIcons.style.transform = "translateX(-5%)"; // Adjust the value as needed
+  additionalIcons.style.transform = "translateX(-5%)"; 
 });
 
 chatInput.addEventListener("focus", () => {
   additionalIcons.classList.remove("show");
 
-  // If the input is empty, restore the placeholder text
   if (!chatInput.value.trim()) {
-    chatInput.placeholder = "Type Something Here"; // Replace with your desired placeholder text
+    chatInput.placeholder = "Type Something Here"; 
   }
 });
 
@@ -76,12 +73,12 @@ function addMessage(text, image, sender) {
   avatar.src = sender === "bot" ? botAvatar : userAvatar;
 
   const contentBox = document.createElement("div");
-  contentBox.className = "content-box unified-box"; // Unified border
+  contentBox.className = "content-box unified-box"; 
 
   if (text) {
     const textBox = document.createElement("div");
     textBox.className = "text-box";
-    textBox.innerHTML = formatMessageWithLinks(text); // Add URL support
+    textBox.innerHTML = formatMessageWithLinks(text);
     contentBox.appendChild(textBox);
   }
 
@@ -92,7 +89,6 @@ function addMessage(text, image, sender) {
     contentBox.appendChild(imageBox);
   }
 
-  // Add timestamp
   const timestamp = document.createElement("div");
   timestamp.className = "timestamp";
   const currentTime = new Date();
@@ -110,7 +106,7 @@ function addMessage(text, image, sender) {
 function formatTime(date) {
   const hours = date.getHours();
   const minutes = date.getMinutes();
-  const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+  const formattedHours = hours % 12 || 12; 
   const ampm = hours >= 12 ? "PM" : "AM";
   return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
 }
@@ -196,7 +192,7 @@ function formatMessageWithLinks(message) {
   });
 }
 
-// Helper functions to detect links and extract IDs
+
 function isYouTubeLink(url) {
   return /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)/.test(url);
 }

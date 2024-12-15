@@ -1,38 +1,38 @@
-/* General styles */
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Ensures padding and border are included in width/height */
+  box-sizing: border-box; 
 }
 
 html, body {
   height: 100%;
   margin: 0;
-  overflow: hidden; /* Prevent scrolling */
+  overflow: hidden; 
 }
 
 body {
-  display: flex; /* Flex layout for centering content */
-  align-items: center; /* Vertically align */
-  justify-content: center; /* Horizontally align */
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
   font-family: Arial, sans-serif;
-  background-color: white; /* Page background color */
+  background-color: white; 
 }
 
 .chat-window {
   width: 100%;
   height: 100%;
-  max-height: 100vh; /* Strictly constrain to viewport height */
+  max-height: 100vh; 
   border: 1px solid #ccc;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Prevent content overflow */
-  background: white; /* Set a default background */
+  overflow: hidden; 
+  background: white; 
 }
 
 
-/* For larger screens */
+
 @media (min-width: 1024px) {
   .chat-window {
     max-width: 100%;
@@ -189,10 +189,9 @@ body {
 }
 
 .text-box {
-  max-width: 70%; /* Restrict width for all chat bubbles */
+
   padding: 10px;
   border-radius: 15px;
-  background-color: #f0f0f0;
   font-size: 14px;
   line-height: 1.4;
   position: relative;
@@ -227,12 +226,12 @@ body {
   display: inline-block; /* Ensure the bubble is inline and horizontal */
 }
 
-/* Arrow styling for user messages */
+
 .message-container.user .text-box::before {
   content: "";
   position: absolute;
   top: 10px;
-  right: -10px; /* Position arrow on the right */
+  right: -10px; 
   width: 10px;
   height: 10px;
   background-color: #FF5912; 
@@ -243,13 +242,14 @@ body {
   background-color: #f0f0f0;
   color: black;
   text-align: left;
+  width: 70%;
 }
 
 .message-container.bot .text-box::before {
   left: -10px;
 }
 
-/* Styling for links in messages */
+
 .message-link {
   color: #007bff;
   text-decoration: underline;
@@ -263,72 +263,71 @@ body {
 
 .timestamp {
   font-size: 0.75rem;
-  color: #888; /* Light gray */
+  color: #888; 
   margin-top: 5px;
   text-align: right;
 }
 
-/* Timestamps for bot messages */
+
 .message-container.bot .timestamp {
-  text-align: left; /* Align timestamp to the left */
+  text-align: left; 
   margin-top: 5px;
-  color: #888; /* Light gray for timestamp */
+  color: #888;
   font-size: 0.75rem;
 }
 
-/* Timestamps for user messages */
 .message-container.user .timestamp {
-  text-align: right; /* Align timestamp to the right */
+  text-align: right;
   margin-top: 5px;
-  color: #888; /* Light gray for timestamp */
+  color: #888; 
   font-size: 0.75rem;
 }
 
 
 
-/* Embedded media for user messages */
+
 .message-container.user .embedded-media {
-  align-self: flex-end; /* Align media to the right */
-  margin-right: 10px; /* Add space from the edge */
-  margin-left: auto; /* Push media away from the left */
+  align-self: flex-end; 
+  margin-right: 10px; 
+  margin-left: auto; 
 }
 
-/* Embedded media for bot messages */
+
 .message-container.bot .embedded-media {
-  align-self: flex-start; /* Align media to the left */
-  margin-left: 10px; /* Add space from the edge */
-  margin-right: auto; /* Push media away from the right */
+  align-self: flex-start; 
+  margin-left: 10px; 
+  margin-right: auto; 
 }
 
 .embedded-media {
   max-width: 100%;
   margin-top: 10px;
-  border-radius: 5px; /* Smooth edges */
+  border-radius: 5px; 
   display: block;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle and lighter shadow */
-  outline: none; /* Removes focus outline */
-  border: 1px solid #ddd; /* Thin border with light gray color */
-  overflow: hidden; /* Ensures no overflow for rounded corners */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+  outline: none; 
+  border: 1px solid #ddd; 
+  overflow: hidden; 
   width: 100%;
   height: auto;
 }
 
 .embedded-media video,
 .embedded-media audio {
-  width: 100%; /* Ensure media fits the container */
+  width: 100%; 
   display: block;
-  border-radius: 5px; /* Match parent border-radius */
-  border: none !important; /* Forcefully removes any border */
-  outline: none !important; /* Removes focus outline */
-  box-shadow: none !important; /* Removes unwanted shadow */
+  border-radius: 5px; 
+  border: none !important; 
+  outline: none !important; 
+  box-shadow: none !important; 
   height: 200px;
 }
 
 
 video, audio {
-  border: none; /* Reset browser-specific styles */
-  outline: none; /* Reset browser-specific focus styles */
-  box-shadow: none; /* Prevent extra shadows */
+  border: none; 
+  outline: none; 
+  box-shadow: none; 
 }
 
 .message-container img {
@@ -336,6 +335,7 @@ video, audio {
   height: auto;
   border-radius: 8px;
   object-fit: cover;
+  margin-top: 2%;
 }
 
 .typing-indicator {
@@ -386,9 +386,9 @@ video, audio {
 @media (max-width: 768px) {
   .chat-window {
     max-width: 100%;
-    height: 100%; /* Full height */
+    height: 100%; 
     margin: 0;
-    border-radius: 0; /* Removes rounded corners */
+    border-radius: 0; 
   }
   .chat-header {
     font-size: 16px;
@@ -422,8 +422,14 @@ video, audio {
   }
 
   .embedded-media {
-    margin-left: auto; /* Align media to the right */
-    margin-right: 10px; /* Add space from the right edge */
-    max-width: 90%; /* Adjust size for smaller screens */
+    margin-left: auto; 
+    margin-right: 10px; 
+    max-width: 90%; 
+  }
+  .additional-icon {
+    position: absolute; 
+    bottom: 70px; 
+    right: 20px; 
+    z-index: 10; 
   }
 }
